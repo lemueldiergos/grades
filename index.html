@@ -348,11 +348,17 @@
             document.getElementById("displayId").textContent =
                 student["ID NO."] || "-";
 
+            const initialGrade = student["Initial Grades"]?.trim();
+            const finalGrade = student["Final Grades"]?.trim();
+
+            const normalizedInitialGrade = Number(initialGrade);
             document.getElementById("initialGrade").textContent =
-                student["Initial Grades"] || "Pending";
+                initialGrade && Number.isFinite(normalizedInitialGrade) && normalizedInitialGrade === 5
+                    ? "Incomplete"
+                    : (initialGrade || "Pending");
 
             document.getElementById("finalGrade").textContent =
-                student["Final Grades"] || "Pending";
+                finalGrade || "Pending";
 
             result.classList.remove("d-none");
         });
